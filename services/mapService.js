@@ -5,22 +5,22 @@ export const getRoutes = async (origin, destination) => {
   //   params: { origin, destination }
   // });
   // return response.data;
-
+  
   // Mock data for now
   return [
     {
       id: 1,
-      name: "Fastest Route",
+      name: 'Fastest Route',
       distance: 15.5,
       duration: 25,
-      coordinates: [], // Would contain actual route coordinates
+      coordinates: [] // Would contain actual route coordinates
     },
     {
       id: 2,
-      name: "Eco Route",
+      name: 'Eco Route',
       distance: 18.2,
       duration: 32,
-      coordinates: [],
-    },
+      coordinates: []
+    }
   ];
 };

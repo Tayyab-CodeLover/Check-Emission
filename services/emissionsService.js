@@ -6,12 +6,12 @@ export const calculateEmissions = async (distance, vehicleType) => {
   //   vehicleType
   // });
   // return response.data;
-
+  
   // Mock calculation based on vehicle type
   const rates = {
     car: 250,
     bike: 0,
-    train: 50,
+    train: 50
   };
   return Math.round(distance * (rates[vehicleType] || 250));
 };

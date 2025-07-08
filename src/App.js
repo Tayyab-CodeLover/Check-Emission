@@ -1,7 +1,6 @@
 import { ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
-// import theme from "./theme";
 import Calculator from "./pages/Calculator";
 import theme from "./theme";
 import Header from "./Components/Headers";
