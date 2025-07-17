@@ -10,6 +10,10 @@ const Header = () => {
   const handlehome = () => {
     navigate("/");
   };
+  const handleLogOut = () => {
+    localStorage.removeItem("accessToken");
+    navigate("/login");
+  };
   return (
     <AppBar
       position="static"
@@ -50,6 +54,9 @@ const Header = () => {
             </Button>
             <Button color="inherit" component={Link} to="/about">
               About
+            </Button>
+            <Button color="inherit" onClick={handleLogOut}>
+              Logout
             </Button>
           </Box>
         </Box>

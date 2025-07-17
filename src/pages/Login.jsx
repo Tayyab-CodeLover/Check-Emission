@@ -11,21 +11,61 @@ import {
   Divider,
 } from "@mui/material";
 import { Email, Lock, Visibility, VisibilityOff } from "@mui/icons-material";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { handleLogin } from "../InvokeApi";
+import { enqueueSnackbar } from "notistack";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
-    if (Object.keys(validationErrors).length === 0) {
-      console.log("Login submitted:", { email, password });
-    } else {
+
+    if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+      return;
+    }
+
+    console.log("Login submitted:", { email, password });
+
+    try {
+      const dataToSend = {
+        email: email,
+        password: password,
+      };
+
+      const { status, data } = await handleLogin(dataToSend);
+      console.log(data.token, "forchecktoken");
+
+      if (status === 200 || status === 201) {
+        enqueueSnackbar(data.message || "Login successful!", {
+          variant: "success",
+          autoHideDuration: 2000,
+        });
+        setTimeout(() => navigate("/"), 2000);
+        localStorage.setItem("accessToken", data?.token);
+      } else {
+        enqueueSnackbar(data.message || "Login completed with warnings", {
+          variant: "warning",
+          autoHideDuration: 2000,
+        });
+      }
+    } catch (error) {
+      let errorMessage = error.message || "Login failed";
+
+      if (error.status === 409) {
+        errorMessage = "Email or username already exists";
+      }
+
+      enqueueSnackbar(errorMessage, {
+        variant: "error",
+        autoHideDuration: 2000,
+      });
     }
   };
 
