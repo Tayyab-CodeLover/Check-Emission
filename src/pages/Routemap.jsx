@@ -194,8 +194,8 @@ const RouteMap = ({ route, start, end, onBack }) => {
         display: "flex",
         flexDirection: "column",
         width: "85%",
-        margin: "0 auto",
-        marginTop: "10px",
+        margin: "20px auto",
+        // marginTop: "10px",
         overflow: "hidden",
       }}
     >
