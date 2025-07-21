@@ -232,49 +232,61 @@ const Results = () => {
   }
 
   return (
-    <Box sx={{ p: 3, maxWidth: 1200, margin: "40px auto" }}>
-      <Typography variant="h4" gutterBottom sx={{ marginBottom: "20px" }}>
-        Recommended Routes
-      </Typography>
+  <Box sx={{ p: 3, maxWidth: 1200, margin: "40px auto" }}>
+  <Typography variant="h4" gutterBottom sx={{ marginBottom: "20px" }}>
+    Recommended Routes
+  </Typography>
 
-      <Grid
-        container
-        spacing={3}
-        sx={{ display: "flex", justifyContent: "space-between" }}
-      >
-        {routes.map((route) => (
-          <Grid item xs={12} md={6} key={route.id}>
-            <Card sx={{ height: "100%" }}>
-              <CardContent
-                sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}
-              >
-                <Typography variant="h6" color="primary">
-                  {route.name}
-                </Typography>
-                <Typography>Distance: {route.distance}</Typography>
-                <Typography>Duration: {route.duration}</Typography>
-                <Typography>Estimated Emissions: {route.emissions}</Typography>
+  <Grid
+    container
+    spacing={3}
+    sx={{ display: "flex", justifyContent: "space-between" }}
+  >
+    {routes.map((route) => (
+      <Grid item xs={12} md={6} key={route.id}>
+        <Card
+          sx={{
+            height: "100%",
+            backgroundColor: route.name === "Eco Route" ? "#e6f4ea" : "white", // light green background for eco
+            border: route.name === "Eco Route" ? "2px solid #4caf50" : "1px solid #ccc", // green border
+          }}
+        >
+          <CardContent
+            sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}
+          >
+            <Typography
+              variant="h6"
+              color={route.name === "Eco Route" ? "success.main" : "primary"}
+            >
+              {route.name}
+            </Typography>
+            <Typography>Distance: {route.distance}</Typography>
+            <Typography>Duration: {route.duration}</Typography>
+            <Typography>
+              Estimated Emissions: {route.emissions}
+            </Typography>
 
-                <Button
-                  variant="outlined"
-                  fullWidth
-                  sx={{ mt: 2 }}
-                  onClick={() => setSelectedRoute(route)}
-                >
-                  View This Route
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
+            <Button
+              variant="outlined"
+              fullWidth
+              sx={{ mt: 2 }}
+              onClick={() => setSelectedRoute(route)}
+            >
+              View This Route
+            </Button>
+          </CardContent>
+        </Card>
       </Grid>
+    ))}
+  </Grid>
 
-      <Box sx={{ mt: 4, textAlign: "center" }}>
-        <Button variant="contained" onClick={() => navigate("/")}>
-          Calculate New Route
-        </Button>
-      </Box>
-    </Box>
+  <Box sx={{ mt: 4, textAlign: "center" }}>
+    <Button variant="contained" onClick={() => navigate("/")}>
+      Calculate New Route
+    </Button>
+  </Box>
+</Box>
+
   );
 };
 
